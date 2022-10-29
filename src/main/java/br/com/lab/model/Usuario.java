@@ -7,16 +7,19 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import br.com.lab.base.Bean;
 import br.com.lab.model.Enum.Perfil;
-@Component
+
+
 public class Usuario extends Bean {	
 	
 	private String usuario;
 	private String nome;
 	private String email;
 	private String senha;
-	private Perfil perfis;
+	private Integer perfis ;
 	
 	
 	
@@ -46,14 +49,16 @@ public class Usuario extends Bean {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}	
-
 	public Perfil getPerfis() {
-		return perfis;
+		return Perfil.toEnum(perfis);
 	}
 	
 	public void setPerfil(Perfil perfil) {
-		this.perfis = perfil;
+		this.perfis = perfil.getCod();
 	}
+	
+	
+	
 	
 	
 	

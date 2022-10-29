@@ -1,20 +1,22 @@
 package br.com.lab.dto;
 
-import br.com.lab.base.Bean;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-public class UsuarioDTO extends Bean{
+import br.com.lab.base.Bean;
+import br.com.lab.model.Enum.Perfil;
+
+public class CredenciaisDTO extends Bean{
 	
-		public String email;
-		public String usuario;
-		public String senha;
+		
+		private String usuario;
+		private String senha;
+		private Set<Integer> perfis = new HashSet<>();
 		
 		
-		public String getEmail() {
-			return email;
-		}
-		public void setEmail(String email) {
-			this.email = email;
-		}
+		
+	
 		public String getUsuario() {
 			return usuario;
 		}
@@ -26,6 +28,14 @@ public class UsuarioDTO extends Bean{
 		}
 		public void setSenha(String senha) {
 			this.senha = senha;
+		}
+	
+		public Set<Perfil> getPerfis() {
+			return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+		}
+		
+		public void addPerfil(Perfil perfil) {
+			perfis.add(perfil.getCod());
 		}
 		
 		

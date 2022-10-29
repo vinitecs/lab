@@ -13,8 +13,11 @@ import org.springframework.util.SystemPropertyUtils;
 
 import br.com.lab.base.Bean;
 import br.com.lab.base.DAO;
+import br.com.lab.dto.CredenciaisDTO;
 import br.com.lab.model.Usuario;
 import br.com.lab.model.Enum.Perfil;
+
+
 @Repository
 public class UsuarioDAO extends DAO{
 	
@@ -32,13 +35,29 @@ public class UsuarioDAO extends DAO{
         	usr.setDataCadastro(rs.getDate("dataCadastro"));
         	usr.setSenha(rs.getString("senha"));        	
         	usr.setEmail(rs.getString("email"));
-        	usr.setEmpresaId(rs.getInt("empresaId"));
+        	usr.setEmpresaId(rs.getInt("empresa_id"));
         	usr.setPerfil(Perfil.toEnum(rs.getInt("perfil")));    
   
       	
         	return usr;
         }
 	};
+	
+	private final RowMapper<CredenciaisDTO> authUser = new RowMapper<CredenciaisDTO>(){
+	     
+
+		public CredenciaisDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+        	CredenciaisDTO usr = new CredenciaisDTO();
+        	
+        	usr.setId(rs.getInt("usuario_id"));
+        	usr.setUsuario(rs.getString("usuario"));        	
+        	usr.setSenha(rs.getString("senha")); 
+        	usr.addPerfil(Perfil.toEnum(rs.getInt("perfil")));
+        	 
+        	return usr;
+        }
+	};
+
 
 	@Override
 	public Object post(Bean bean) {
@@ -55,7 +74,7 @@ public class UsuarioDAO extends DAO{
 	             + " 	, nome "
 	             + " 	, email "
 	             + " 	, senha "
-	             + " 	, empresaId "
+	             + " 	, empresa_id "
 	             + " 	, dataCadastro "
 	             + " 	, perfil "
 	             + " 	) "
@@ -64,7 +83,7 @@ public class UsuarioDAO extends DAO{
 	             + " 	, :nome "
 	             + " 	, :email "
 	             + " 	, :senha "
-	             + " 	, :empresaId "
+	             + " 	, :empresa_id "
 	             + " 	, :dataCadastro "
 	             + " 	, :perfil "
 	             + " 	) ";
@@ -113,7 +132,7 @@ public class UsuarioDAO extends DAO{
 		parameters.addValue("nome", usr.getNome());
 		parameters.addValue("email", usr.getEmail());
 		parameters.addValue("senha", usr.getSenha());
-		parameters.addValue("empresaId", usr.getEmpresaId());
+		parameters.addValue("empresa_id", usr.getEmpresaId());
 		parameters.addValue("dataCadastro", usr.getDataCadastro());		
 		parameters.addValue("perfil",usr.getPerfis().getCod());
 		
@@ -130,4 +149,15 @@ public class UsuarioDAO extends DAO{
 		return usr ;
 	}
 
+	
+	public CredenciaisDTO Auth(String obj) {		
+			String sql = "select "
+							+ " usuario_id ,"
+							+ " usuario, "
+							+ " senha ,"
+							+ " perfil "
+						+ " from usuario "
+						+ "where usuario = ?" ;
+			return (CredenciaisDTO) jdbcTemplate.queryForObject(sql, authUser, obj);
+	}
 }

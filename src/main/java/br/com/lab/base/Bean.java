@@ -6,7 +6,7 @@ public class Bean {
 
 	private Integer id;
 	private Date dataCadastro;
-	private Integer empresaId;
+	private Integer empresa_id;
 	
 	
 	public Integer getId() {
@@ -25,11 +25,11 @@ public class Bean {
 	}
 	
 	public Integer getEmpresaId() {
-		return empresaId;
+		return empresa_id;
 	}
 	
-	public void setEmpresaId(Integer empresaId) {
-		this.empresaId = empresaId;
+	public void setEmpresaId(Integer empresa_id) {
+		this.empresa_id = empresa_id;
 	}
 	
 	

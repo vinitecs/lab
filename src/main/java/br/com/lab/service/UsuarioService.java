@@ -73,8 +73,10 @@ public class UsuarioService extends BC {
 	@GET
 	@Produces({MediaType.APPLICATION_JSON})
 	@Path("/search")
-	public String search(@QueryParam("usuario") String usuario) {
-		
+	public String search(@QueryParam("usuario") String usuario) {		
 		return gs.toJson(dao.getByUser(usuario));
 	} 
+	
+	
+	
 }
