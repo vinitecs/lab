@@ -27,10 +27,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 		public JWTAuthenticationFilter(AuthenticationManager authenticationManager,JWTUtil jwtUtil) {
 			this.authenticationManager = authenticationManager;
-			this.jwtUtil = jwtUtil;
-			
-		}
-	
+			this.jwtUtil = jwtUtil;	
+		}	
 
 		@Override
 		public Authentication attemptAuthentication(HttpServletRequest req,
@@ -58,7 +56,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			
 		}
 		
-		
 		private class JWTAuthenticationFailureHandler implements AuthenticationFailureHandler {
 			 
 	        @Override
@@ -77,5 +74,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	                + "\"message\": \"Email ou senha inválidos\", "
 	                + "\"path\": \"/login\"}";
 	        }
-		}
+	    }
+	
 		}

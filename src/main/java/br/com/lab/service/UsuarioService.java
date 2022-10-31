@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import br.com.lab.base.BC;
 import br.com.lab.base.Bean;
 import br.com.lab.dao.UsuarioDAO;
+import br.com.lab.email.EmailServiceImpl;
 import br.com.lab.model.Usuario;
 import br.com.lab.model.Enum.Perfil;
 
@@ -42,6 +43,9 @@ public class UsuarioService extends BC {
 	@Autowired
 	BCryptPasswordEncoder bc;
 	
+	@Autowired
+	EmailServiceImpl imp;
+	
 	
 	@POST
 	@Produces({MediaType.APPLICATION_JSON})	
@@ -51,7 +55,7 @@ public class UsuarioService extends BC {
 						@FormParam("email") String email,
 						@FormParam("senha") String senha,
 						@FormParam("dataCadastro") String dataCadastro,
-						@FormParam("empresaId") Integer empresaId,
+						@FormParam("empresa_id") Integer empresaId,
 						@FormParam("perfil") Integer perfil) throws ParseException {
 		
 		
@@ -65,6 +69,20 @@ public class UsuarioService extends BC {
 		user.setEmail(email);
 		user.setEmpresaId(empresaId);
 		user.setPerfil(Perfil.toEnum(perfil));
+		
+		imp.sendSimpleMessage(
+								email,
+								"viniciusamalia@gmail.com",
+								 "<h1>apenas um teste</h1>"
+								+"<br/>"
+								+ "<strong>apenas um teste</strong>"
+								+ ""
+								+ ""
+								+ ""
+								+ ""
+								+ ""
+								+ ""
+								+ "");
 	
 		return gs.toJson(dao.insert(user)) ;
 	}

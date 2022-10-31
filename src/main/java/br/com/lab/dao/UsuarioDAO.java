@@ -151,13 +151,13 @@ public class UsuarioDAO extends DAO{
 
 	
 	public CredenciaisDTO Auth(String obj) {		
-			String sql = "select "
-							+ " usuario_id ,"
-							+ " usuario, "
-							+ " senha ,"
-							+ " perfil "
-						+ " from usuario "
-						+ "where usuario = ?" ;
+			String sql = " select usuario_id, "
+							+ "      usuario, "
+							+ "        senha, "
+							+ "       perfil  "
+						    + " from usuario    "
+					      	+ "where usuario = ?" ;
+			
 			return (CredenciaisDTO) jdbcTemplate.queryForObject(sql, authUser, obj);
 	}
 }
