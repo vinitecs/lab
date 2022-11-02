@@ -15,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,6 +51,7 @@ public class UsuarioService extends BC {
 	@POST
 	@Produces({MediaType.APPLICATION_JSON})	
 	@Path("/insert")
+	@PreAuthorize("hasAnyHole('CLIENTE')")
 	public String login(@FormParam("usuario") String usuario,
 						@FormParam("nome") String nome,
 						@FormParam("email") String email,
@@ -70,19 +72,7 @@ public class UsuarioService extends BC {
 		user.setEmpresaId(empresaId);
 		user.setPerfil(Perfil.toEnum(perfil));
 		
-		imp.sendSimpleMessage(
-								email,
-								"viniciusamalia@gmail.com",
-								 "<h1>apenas um teste</h1>"
-								+"<br/>"
-								+ "<strong>apenas um teste</strong>"
-								+ ""
-								+ ""
-								+ ""
-								+ ""
-								+ ""
-								+ ""
-								+ "");
+		imp.sendSimpleMessage("viniciusamalia@gmail.com","viniciusamalia@gmail.com","<h1>apenas um teste</h1>");
 	
 		return gs.toJson(dao.insert(user)) ;
 	}
