@@ -26,8 +26,7 @@ public enum Perfil {
 		}
 		
 		for (Perfil x : Perfil.values() ) {
-			if(x.getCod() == cod ) {
-				System.out.println(x);
+			if(x.getCod() == cod ) {				
 				return x;
 			}
 		}

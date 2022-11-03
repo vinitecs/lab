@@ -44,11 +44,8 @@ public class UsuarioDAO extends DAO{
 	};
 	
 	private final RowMapper<CredenciaisDTO> authUser = new RowMapper<CredenciaisDTO>(){
-	     
-
 		public CredenciaisDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
-        	CredenciaisDTO usr = new CredenciaisDTO();
-        	
+        	CredenciaisDTO usr = new CredenciaisDTO();        	
         	usr.setId(rs.getInt("usuario_id"));
         	usr.setUsuario(rs.getString("usuario"));        	
         	usr.setSenha(rs.getString("senha")); 

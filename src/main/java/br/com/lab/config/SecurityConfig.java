@@ -29,9 +29,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private UserDetailsService userDetaislService;
 	
 	private static String[] PUBLIC_MATCHERS = {};
+	
 	// criar configurações de parametros via GET
 	private static String[] PUBLIC_MATCHERS_GET = {
 		"/rest/usr/search/**"
+	};
+	
+	private static String[] PUBLIC_MATCHERS_POST = {
+		"/rest/usr/empresa/**"	
 	};
 	@Autowired
 	private JWTUtil jwtUtil;
@@ -41,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.cors().and().csrf().disable();
 		http.authorizeHttpRequests()
 		.antMatchers(HttpMethod.GET,PUBLIC_MATCHERS_GET).permitAll()
+		.antMatchers(HttpMethod.POST,PUBLIC_MATCHERS_POST).permitAll()
 		.antMatchers(PUBLIC_MATCHERS).permitAll()
 		.anyRequest().authenticated();
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(),jwtUtil));

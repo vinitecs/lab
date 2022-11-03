@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
@@ -28,12 +29,14 @@ import br.com.lab.base.BC;
 import br.com.lab.base.Bean;
 import br.com.lab.dao.UsuarioDAO;
 import br.com.lab.email.EmailServiceImpl;
+import br.com.lab.model.Empresa;
 import br.com.lab.model.Usuario;
 import br.com.lab.model.Enum.Perfil;
 
 @Service
 @Path("/usr")
 @RequestMapping
+@RestController
 public class UsuarioService extends BC {
 	
 	
@@ -51,7 +54,7 @@ public class UsuarioService extends BC {
 	@POST
 	@Produces({MediaType.APPLICATION_JSON})	
 	@Path("/insert")
-	@PreAuthorize("hasRole('ROLE_CLIENTE')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String login(@FormParam("usuario") String usuario,
 						@FormParam("nome") String nome,
 						@FormParam("email") String email,
@@ -85,6 +88,20 @@ public class UsuarioService extends BC {
 		return gs.toJson(dao.getByUser(usuario));
 	} 
 	
+	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/scales")
+	@PreAuthorize("hasRole('ROLE_CLIENTE')")
+	public String scales(@QueryParam("usuario_id") Integer usuario_id) {		
+		
+		return gs.toJson("");
+	} 
 	
-	
+	@POST
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/empresa")
+	public String createScale(@BeanParam Empresa emp) {
+		
+		return gs.toJson(emp);
+	}
 }

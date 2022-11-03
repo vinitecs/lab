@@ -1,27 +1,16 @@
 package br.com.lab.model;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
 import br.com.lab.base.Bean;
 import br.com.lab.model.Enum.Perfil;
 
 
-public class Usuario extends Bean {	
+public class Usuario extends Bean {
 	
-	private String usuario;
-	private String nome;
-	private String email;
-	private String senha;
-	private Integer perfis ;
-	
-	
+	private String  usuario;
+	private String  nome;
+	private String  email;
+	private String  senha;
+	private Integer perfis;
 	
 	public Usuario() {}
 
