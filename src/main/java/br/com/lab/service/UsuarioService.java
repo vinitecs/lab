@@ -51,7 +51,7 @@ public class UsuarioService extends BC {
 	@POST
 	@Produces({MediaType.APPLICATION_JSON})	
 	@Path("/insert")
-	@PreAuthorize("hasAnyHole('CLIENTE')")
+	@PreAuthorize("hasRole('ROLE_CLIENTE')")
 	public String login(@FormParam("usuario") String usuario,
 						@FormParam("nome") String nome,
 						@FormParam("email") String email,
@@ -72,7 +72,7 @@ public class UsuarioService extends BC {
 		user.setEmpresaId(empresaId);
 		user.setPerfil(Perfil.toEnum(perfil));
 		
-		imp.sendSimpleMessage("viniciusamalia@gmail.com","viniciusamalia@gmail.com","<h1>apenas um teste</h1>");
+		//imp.sendSimpleMessage("viniciusamalia@gmail.com","viniciusamalia@gmail.com","<h1>apenas um teste</h1>");
 	
 		return gs.toJson(dao.insert(user)) ;
 	}

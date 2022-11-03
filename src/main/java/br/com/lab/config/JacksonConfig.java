@@ -12,8 +12,7 @@ public class JacksonConfig {
 	@Bean
 	public Jackson2ObjectMapperBuilder objectMapperBuilder() {
 		Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder() {
-			public void configure(ObjectMapper objectMapper) {
-			
+			public void configure(ObjectMapper objectMapper) {			
 				super.configure(objectMapper);
 			}
 		};

@@ -23,9 +23,8 @@ public class UserDetailServiceImpl implements UserDetailsService{
 		if(usuario == null) {
 			/**
 			 * execessão  da api
-			 * 
+			 *
 			 * */
-			
 		}
 		
 		
