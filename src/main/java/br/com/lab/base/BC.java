@@ -6,5 +6,9 @@ import com.google.gson.Gson;
 @Component
 public class BC {
 	
-	Gson gs = new Gson();
+	
+	
+	public Gson json() {
+		return new Gson();
+	}
 }

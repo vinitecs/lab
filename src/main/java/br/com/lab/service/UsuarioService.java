@@ -34,7 +34,7 @@ import br.com.lab.model.Usuario;
 import br.com.lab.model.Enum.Perfil;
 
 @Service
-@Path("/usr")
+@Path("/usuario")
 @RequestMapping
 @RestController
 public class UsuarioService extends BC {
@@ -52,7 +52,7 @@ public class UsuarioService extends BC {
 	
 	
 	@POST
-	@Produces({MediaType.APPLICATION_JSON})	
+	
 	@Path("/insert")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String login(@FormParam("usuario") String usuario,
@@ -97,11 +97,5 @@ public class UsuarioService extends BC {
 		return gs.toJson("");
 	} 
 	
-	@POST
-	@Produces({MediaType.APPLICATION_JSON})
-	@Path("/empresa")
-	public String createScale(@BeanParam Empresa emp) {
-		
-		return gs.toJson(emp);
-	}
+
 }

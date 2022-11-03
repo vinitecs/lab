@@ -11,6 +11,7 @@ public class Usuario extends Bean {
 	private String  email;
 	private String  senha;
 	private Integer perfis;
+	private Endereco endereco;
 	
 	public Usuario() {}
 
@@ -45,7 +46,13 @@ public class Usuario extends Bean {
 	public void setPerfil(Perfil perfil) {
 		this.perfis = perfil.getCod();
 	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 	
+	public Endereco getEndereco() {
+		return endereco;
+	}
 	
 	
 	

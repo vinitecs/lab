@@ -2,7 +2,9 @@ package br.com.lab.model;
 
 import javax.ws.rs.FormParam;
 
-public class Empresa {
+import br.com.lab.base.Bean;
+
+public class Empresa extends Bean{
 		
 	
 		@FormParam("empresaId")
