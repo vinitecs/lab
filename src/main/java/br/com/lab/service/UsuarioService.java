@@ -10,7 +10,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,7 +29,6 @@ import br.com.lab.dao.UsuarioDAO;
 import br.com.lab.email.EmailServiceImpl;
 import br.com.lab.model.Usuario;
 import br.com.lab.model.Enum.Perfil;
-import br.com.lab.security.UserSS;
 
 @Service
 @Path("/usuario")
@@ -71,6 +73,15 @@ public class UsuarioService extends BC {
 		user.setPerfil(Perfil.toEnum(perfil));
 		
 		//imp.sendSimpleMessage("viniciusamalia@gmail.com","viniciusamalia@gmail.com","<h1>apenas um teste</h1>");
+		
+		
+		if( dao.getByUser(usuario)) {
+			  throw new WebApplicationException(Response
+				        .status(Status.BAD_REQUEST)
+				        .type(MediaType.APPLICATION_JSON)
+				        .entity(gs.toJson("Usuario Existente"))
+				        .build());
+		}
 	
 		return gs.toJson(dao.insert(user)) ;
 	}

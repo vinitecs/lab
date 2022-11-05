@@ -12,13 +12,14 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.lab.base.BC;
 import br.com.lab.security.JWTUtil;
 import br.com.lab.security.UserSS;
 
 @Path("/auth")
-@Service
+@RestController
 public class AuthResource extends BC{
 
 	@Autowired
