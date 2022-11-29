@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private static String[] PUBLIC_MATCHERS_POST = {
 		"/rest/usr/empresa/**"	
 	};
+	
 	@Autowired
 	private JWTUtil jwtUtil;
 		
@@ -52,7 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(),jwtUtil));
 		http.addFilter(new JWTAuthorizationFilter(authenticationManager(),jwtUtil,userDetaislService));
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
 	}
+	
 	@Bean
 	UrlBasedCorsConfigurationSource CorsConfigurationSource() {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -64,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public void configure(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(userDetaislService).passwordEncoder(bCryptPasswordEncoder());
 	}
+	
 	@Bean 
 	BCryptPasswordEncoder bCryptPasswordEncoder() {
 			return new BCryptPasswordEncoder(); 

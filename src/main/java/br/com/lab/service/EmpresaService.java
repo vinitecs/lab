@@ -12,10 +12,40 @@ import br.com.lab.base.BC;
 public class EmpresaService extends BC{
 
 	Gson gs = new Gson();
+	
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON})
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public String empresa() {
+	public String criarEmpresa() {
+		
+		
+		return "";
+	}
+	
+	
+	
+	@POST
+	@Consumes({MediaType.APPLICATION_JSON})
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String deleteEmpresa() {
+		
+		
+		return "";
+	}
+	
+	
+	@POST
+	@Consumes({MediaType.APPLICATION_JSON})
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String searchEmpresa() {		
+		
+		return "";
+	}
+	
+	@POST
+	@Consumes({MediaType.APPLICATION_JSON})
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String editarDadosEmpresa() {
 		
 		
 		return "";
