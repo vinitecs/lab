@@ -36,7 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	};
 	
 	private static String[] PUBLIC_MATCHERS_POST = {
-		"/rest/usr/empresa/**"	
+			"/rest/usr/empresa/**",	
+			"/rest/auth/refresh_token"
 	};
 	
 	@Autowired
@@ -45,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {		
 		http.cors().and().csrf().disable();
-		http.authorizeHttpRequests()
+		http.authorizeHttpRequests()		
 		.antMatchers(HttpMethod.GET,PUBLIC_MATCHERS_GET).permitAll()
 		.antMatchers(HttpMethod.POST,PUBLIC_MATCHERS_POST).permitAll()
 		.antMatchers(PUBLIC_MATCHERS).permitAll()

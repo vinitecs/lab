@@ -135,15 +135,24 @@ public class UsuarioDAO extends DAO{
 		
 	}
 	
-	public Object getByUser(String usuario) {
+	public Boolean getByUser(String usuario) {
 		
 		Usuario usr = new Usuario();
 			String sql ="select * from usuario where usuario = ?" ;
 			
-			usr = (Usuario)	 jdbcTemplate.queryForObject(sql,
-						rowMapper, new Object[] {usuario});
+
 			
-		return usr ;
+			
+			try {
+				usr = (Usuario)	 jdbcTemplate.queryForObject(sql,rowMapper, usuario);
+				if(usr != null) {
+				return 	true;
+				}				
+			}catch (Exception e) {
+				return false;
+			}
+			
+			return false;
 	}
 
 	

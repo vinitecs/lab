@@ -4,32 +4,29 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.ws.rs.BeanParam;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
 import br.com.lab.base.BC;
-import br.com.lab.base.Bean;
 import br.com.lab.dao.UsuarioDAO;
 import br.com.lab.email.EmailServiceImpl;
-import br.com.lab.model.Empresa;
 import br.com.lab.model.Usuario;
 import br.com.lab.model.Enum.Perfil;
 
@@ -51,8 +48,8 @@ public class UsuarioService extends BC {
 	EmailServiceImpl imp;
 	
 	
-	@POST
 	
+	@POST	
 	@Path("/insert")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String login(@FormParam("usuario") String usuario,
@@ -76,6 +73,15 @@ public class UsuarioService extends BC {
 		user.setPerfil(Perfil.toEnum(perfil));
 		
 		//imp.sendSimpleMessage("viniciusamalia@gmail.com","viniciusamalia@gmail.com","<h1>apenas um teste</h1>");
+		
+		
+		if( dao.getByUser(usuario)) {
+			  throw new WebApplicationException(Response
+				        .status(Status.BAD_REQUEST)
+				        .type(MediaType.APPLICATION_JSON)
+				        .entity(gs.toJson("Usuario Existente"))
+				        .build());
+		}
 	
 		return gs.toJson(dao.insert(user)) ;
 	}
